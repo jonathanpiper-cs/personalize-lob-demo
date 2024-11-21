@@ -4,16 +4,14 @@ import type { IQueryParams } from '$lib/types';
 
 export const load: PageServerLoad = async ({ url }) => {
 	const parameters: IQueryParams = {
-		contentType: 'genre',
+		contentType: 'page',
 		queryParams: [{ key: 'url', value: url.pathname }],
-	    jsonRteFields: ['description'],
 	};
 	url.searchParams.forEach((value, key) => {
 	    parameters[key] = value;
 	});
 	const entries = await getContent(parameters);
-	const entry = entries[0]
 	return {
-		entry
+		entry: entries[0]
 	};
 };

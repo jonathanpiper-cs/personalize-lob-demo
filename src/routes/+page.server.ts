@@ -4,7 +4,7 @@ import type { PageServerLoad } from './$types';
 export const load: PageServerLoad = async ({ route }) => {
 
 	const parameters = {
-		contentType: 'landing_page',
+		contentType: 'page',
 		queryParams: [{ key: 'url', value: route.id }]
 	};
     // console.log(Stack.config.live_preview)

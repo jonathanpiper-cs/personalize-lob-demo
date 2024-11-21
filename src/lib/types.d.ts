@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // import { Stack } from '@contentstack/delivery-sdk/dist/types/stack';
-import Personalize from "@contentstack/personalize-edge-sdk";
+import Personalize from '@contentstack/personalize-edge-sdk';
 
 interface Entry extends BaseEntry {
 	[key: string]: string | undefined;
+	uid: string;
+	title: string;
+    $?: any
 }
 
 export interface ILandingPage extends Entry {
@@ -13,6 +16,13 @@ export interface ILandingPage extends Entry {
 	heading: string;
 	body: string;
 	banner: IAsset;
+}
+
+export interface IPage extends Entry {
+	url: string;
+	description: string;
+	text: string;
+    cta?: ICTA
 }
 
 export interface IAsset {
@@ -30,13 +40,12 @@ export interface IAsset {
 export interface IQueryParams {
 	locale?: string;
 	contentType: string;
-	singleton?: boolean;
 	queryParams?: KeyValuePair[];
 	previewQuery?: LivePreviewQuery & ReleasePreviewQuery;
 	includes?: string[];
 	jsonRteFields?: string[];
-    [index: string]: string | boolean | { key: string; value: string; }[] | string[];
-    [Personalize.VARIANT_QUERY_PARAM]: string;
+	[index: string]: string | boolean | { key: string; value: string }[] | string[];
+	[Personalize.VARIANT_QUERY_PARAM]: string;
 }
 export interface LivePreviewQuery {
 	live_preview: string;
@@ -78,4 +87,11 @@ export interface IGenre extends Entry {
 	description: string;
 	subgenre_of?: IReference[];
 	$?: any;
+}
+
+export interface ICTA {
+    title: string;
+    text: string;
+    image: IAsset;
+    link: ILink;
 }
