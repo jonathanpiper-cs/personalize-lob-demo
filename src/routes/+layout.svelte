@@ -13,7 +13,6 @@
 	} from '$env/static/public';
 	import ContentstackLivePreview from '@contentstack/live-preview-utils';
 	import AttributesBar from '$lib/components/AttributesBar.svelte';
-	// import * from '@skeletonlabs/skeleton';
 
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
@@ -23,19 +22,20 @@
 			await Personalize.init(PUBLIC_CS_PERSONALIZE_PROJECT_UID);
 			Personalize.setEdgeApiUrl(PUBLIC_CS_PERSONALIZE_EDGE_API_URL);
 		}
-		if (data.livePreviewStatus) {
-			ContentstackLivePreview.init({
-				stackDetails: { apiKey: PUBLIC_CS_API_KEY, environment: 'prod', locale: 'en-us' },
-				mode: 'builder'
-			});
-		}
+		// if (data.livePreviewStatus) {
+		// console.log('+layout.svelte || Initializing Live Preview SDK');
+		// ContentstackLivePreview.init({
+		// 	stackDetails: { apiKey: PUBLIC_CS_API_KEY, environment: 'prod', locale: 'en-us' },
+		// 	mode: 'builder'
+		// });
+		// }
 	});
 </script>
 
 <!-- <Header data={data.header}></Header> -->
 <div class="container mx-auto my-4">
 	{@render children()}
-    <AttributesBar />
+	<AttributesBar />
 </div>
 
 <style>

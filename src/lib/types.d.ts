@@ -22,7 +22,9 @@ export interface IPage extends Entry {
 	url: string;
 	description: string;
 	text: string;
-    cta?: ICTA
+    cta?: ICTA;
+    department_specifics?: string;
+    lob_specifics?: string;
 }
 
 export interface IAsset {
