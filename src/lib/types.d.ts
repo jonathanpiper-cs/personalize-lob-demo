@@ -6,7 +6,31 @@ interface Entry extends BaseEntry {
 	[key: string]: string | undefined;
 	uid: string;
 	title: string;
-    $?: any
+	$?: any;
+	modular_blocks?: IModularBlock[];
+}
+
+interface IModularBlock {
+	cta?: ISimpleCTA;
+	testimonial?: ITestimonial;
+	columns?: IColumn;
+}
+
+interface ISimpleCTA {
+	header: string;
+	text: string;
+	action: ILink;
+}
+
+interface ITestimonial {
+	header: string;
+	text: string;
+	attribution: string;
+	image: IAsset;
+}
+
+interface IColumn {
+	column: [{ header: string; text: string }];
 }
 
 export interface ILandingPage extends Entry {
@@ -22,9 +46,9 @@ export interface IPage extends Entry {
 	url: string;
 	description: string;
 	text: string;
-    cta?: ICTA;
-    department_specifics?: string;
-    lob_specifics?: string;
+	cta?: ICTA;
+	department_specifics?: string;
+	lob_specifics?: string;
 }
 
 export interface IAsset {
@@ -92,8 +116,8 @@ export interface IGenre extends Entry {
 }
 
 export interface ICTA {
-    title: string;
-    text: string;
-    image: IAsset;
-    link: ILink;
+	title: string;
+	text: string;
+	image?: IAsset;
+	link: ILink;
 }

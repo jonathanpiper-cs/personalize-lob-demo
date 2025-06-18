@@ -15,6 +15,7 @@ export const getContent = async (params: IQueryParams) => {
 	const variantParam = params[Personalize.VARIANT_QUERY_PARAM] as string;
 	let entry = Stack.contentType(params.contentType).entry();
 	if (variantParam) {
+        console.log('variant', variantParam)
 		const variantAlias = Personalize.variantParamToVariantAliases(variantParam).join(',');
 		entry = entry.variants(variantAlias);
 	}

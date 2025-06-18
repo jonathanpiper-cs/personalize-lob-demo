@@ -1,8 +1,6 @@
 <script lang="ts">
 	import '../app.css';
-	// import { PUBLIC_CS_API_KEY } from '$env/static/public';
 	import { onMount } from 'svelte';
-	// import Header from '$lib/components/Header.svelte';
 	import type { LayoutData } from './$types';
 	import { type Snippet } from 'svelte';
 	import Personalize from '@contentstack/personalize-edge-sdk';
@@ -17,18 +15,20 @@
 	let { data, children }: { data: LayoutData; children: Snippet } = $props();
 
 	onMount(async () => {
+        let pSdk
 		if (Personalize.getInitializationStatus() !== 'success') {
 			console.log('+layout.svelte || Initializing Personalize SDK');
-			await Personalize.init(PUBLIC_CS_PERSONALIZE_PROJECT_UID);
+			pSdk = await Personalize.init(PUBLIC_CS_PERSONALIZE_PROJECT_UID);
+            // console.log(pSdk.getVariantAliases())
 			Personalize.setEdgeApiUrl(PUBLIC_CS_PERSONALIZE_EDGE_API_URL);
 		}
-		// if (data.livePreviewStatus) {
-		// console.log('+layout.svelte || Initializing Live Preview SDK');
-		// ContentstackLivePreview.init({
-		// 	stackDetails: { apiKey: PUBLIC_CS_API_KEY, environment: 'prod', locale: 'en-us' },
-		// 	mode: 'builder'
-		// });
-		// }
+		if (data.livePreviewStatus) {
+			console.log('+layout.svelte || Initializing Live Preview SDK');
+			ContentstackLivePreview.init({
+				stackDetails: { apiKey: PUBLIC_CS_API_KEY, environment: 'prod', locale: 'en-us' },
+				mode: 'builder',
+			});
+		}
 	});
 </script>
 
